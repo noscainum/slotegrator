@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa45f77a-39dc-4054-bd46-1ddeb5e0420f" name="Changes" comment="" />
+    <list default="true" id="aa45f77a-39dc-4054-bd46-1ddeb5e0420f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,7 +20,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/slotegrator" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -41,7 +43,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "vcs.Git"
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -172,6 +174,8 @@
       <workItem from="1663608738971" duration="1411000" />
       <workItem from="1663610159777" duration="12159000" />
       <workItem from="1663624605670" duration="331000" />
+      <workItem from="1663624993416" duration="136000" />
+      <workItem from="1663625137456" duration="71000" />
     </task>
     <servers />
   </component>
@@ -191,7 +195,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
-      <path value="$PROJECT_DIR$" />
       <path value="$PROJECT_DIR$/slotegrator" />
     </ignored-roots>
   </component>
