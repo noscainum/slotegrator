@@ -12,11 +12,6 @@ import ui.pages.LoginPage;
 import ui.pages.PlayersTable;
 import util.ConfProperties;
 
-import java.sql.SQLOutput;
-import java.time.Duration;
-import java.util.*;
-import java.util.stream.Stream;
-
 public class UISteps {
 
     WebDriver driver;

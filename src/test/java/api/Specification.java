@@ -21,11 +21,13 @@ public class Specification {
     public static RequestSpecification requestSpecificationWithAuth() {
         RequestSpecification spec = given().config(RestAssured.config()
                         .headerConfig(HeaderConfig.headerConfig()
-                                .overwriteHeadersWithName("Content-Type")
                                 .overwriteHeadersWithName("Authorization")))
-                .header("Content-Type", "application/json;charset=UTF-8")
                 .header("Authorization", String.format("Basic %s", authBasic))
                 .baseUri(url);
+        spec.config(RestAssured.config()
+                .headerConfig(HeaderConfig.headerConfig()
+                        .overwriteHeadersWithName("Content-Type")))
+                .header("Content-Type", "application/json;charset=UTF-8");
         return spec;
     }
 
@@ -34,6 +36,9 @@ public class Specification {
                         .headerConfig(HeaderConfig.headerConfig()
                                 .overwriteHeadersWithName("Authorization")))
                 .header("Authorization", String.format("Bearer %s", token));
+        spec.config(RestAssured.config()
+                .headerConfig(HeaderConfig.headerConfig()
+                        .overwriteHeadersWithName("Content-Type")));
         return spec;
     }
 

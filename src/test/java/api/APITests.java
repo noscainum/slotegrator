@@ -15,8 +15,6 @@ public class APITests {
     private static final String passwordRepeat = "dmVyeXN0cm9uZ3Bhc3M=";
     private static final String name = "New";
     private static final String surname = "User";
-    private static final String currencyCode = "USD";
-
 
     @Test
     public void shouldGrantClientCredentials() {
@@ -27,7 +25,7 @@ public class APITests {
     public void shouldRegisterNewPlayer() {
         String username = RandomStringUtils.random(8, true, false);
         String email = username + "@example.com";
-        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname, currencyCode);
+        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname);
         Assert.assertNotNull(newPlayer.getId());
         Assert.assertEquals(username, newPlayer.getUsername());
         Assert.assertEquals(email, newPlayer.getEmail());
@@ -36,19 +34,19 @@ public class APITests {
     }
 
     @Test
-    public void shouldLoginAsNewPlayer(){
+    public void shouldLoginAsNewPlayer() {
         String username = RandomStringUtils.random(8, true, false);
         String email = username + "@example.com";
-        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname, currencyCode);
+        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname);
         Assert.assertNotNull(getUserToken(username, passwordChange));
 
     }
 
     @Test
-    public void shouldGetPlayerProfile(){
+    public void shouldGetPlayerProfile() {
         String username = RandomStringUtils.random(8, true, false);
         String email = username + "@example.com";
-        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname, currencyCode);
+        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname);
         NewPlayerCredentials playerProfile = getPlayerProfile(getUserToken(newPlayer.username, passwordChange), newPlayer.getId());
         Assert.assertEquals(playerProfile.getUsername(), newPlayer.getUsername());
         Assert.assertEquals(playerProfile.getEmail(), newPlayer.getEmail());
@@ -57,15 +55,15 @@ public class APITests {
     }
 
     @Test
-    public void shouldNotGetOtherPlayerProfile(){
+    public void shouldNotGetOtherPlayerProfile() {
         String username = RandomStringUtils.random(8, true, false);
         String email = username + "@example.com";
-        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname, currencyCode);
+        NewPlayerCredentials newPlayer = registerNewPlayer(username, passwordChange, passwordRepeat, email, name, surname);
         getOtherProfile(getUserToken(newPlayer.username, passwordChange), newPlayer.getId());
 
     }
 
-    public static String getGuestToken() {
+    public String getGuestToken() {
         Specification.useSpecification(Specification.requestSpecificationWithAuth(), Specification.get200());
         String grantType = "client_credentials";
         String scope = "guest:default";
@@ -79,19 +77,19 @@ public class APITests {
         return userCredentials.getAccess_token();
     }
 
-    public static NewPlayerCredentials registerNewPlayer(String username, String passwordChange, String passwordRepeat, String email, String name, String surname, String currencyCode) {
+    public NewPlayerCredentials registerNewPlayer(String username, String passwordChange, String passwordRepeat, String email, String name, String surname) {
         Specification.useSpecification(Specification.requestSpecificationWithToken(getGuestToken()), Specification.get201());
-        NewPlayerRequest newPlayerRequest = new NewPlayerRequest(username, passwordChange, passwordRepeat, email, name, surname, currencyCode);
+        NewPlayerRequest newPlayerRequest = new NewPlayerRequest(username, passwordChange, passwordRepeat, email, name, surname);
         NewPlayerCredentials newPlayerCredentials = given()
                 .body(newPlayerRequest)
                 .when().log().all()
                 .post("/v2/players")
                 .then().log().all()
                 .extract().as(NewPlayerCredentials.class);
-        return  newPlayerCredentials;
+        return newPlayerCredentials;
     }
 
-    public static String getUserToken(String username, String password){
+    public String getUserToken(String username, String password) {
         Specification.useSpecification(Specification.requestSpecificationWithAuth(), Specification.get200());
         String grantType = "password";
         UserTokenRequest user = new UserTokenRequest(grantType, username, password);
@@ -104,7 +102,7 @@ public class APITests {
         return userCredentials.getAccess_token();
     }
 
-    public static NewPlayerCredentials getPlayerProfile(String userToken, Integer id){
+    public NewPlayerCredentials getPlayerProfile(String userToken, Integer id) {
         Specification.useSpecification(Specification.requestSpecificationWithToken(userToken), Specification.get200());
         NewPlayerCredentials playerProfile = given()
                 .when().log().all()
@@ -114,11 +112,11 @@ public class APITests {
         return playerProfile;
     }
 
-    public static void getOtherProfile(String userToken, Integer id){
+    public void getOtherProfile(String userToken, Integer id) {
         Specification.useSpecification(Specification.requestSpecificationWithToken(userToken), Specification.get404());
         RestAssured.given()
                 .when().log().all()
-                .get("/v2/players/" + (id-1))
+                .get("/v2/players/" + (id - 1))
                 .then().log().all();
     }
 

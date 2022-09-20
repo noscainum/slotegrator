@@ -1,10 +1,10 @@
 package api.pojo;
 
 public class UserCredentials {
-    private String token_type;
-    private Integer expires_in;
-    private String access_token;
-    private String refresh_token;
+    public String token_type;
+    public Integer expires_in;
+    public String access_token;
+    public String refresh_token;
 
     public UserCredentials(String token_type, Integer expires_in, String access_token, String refresh_token) {
         this.token_type = token_type;
